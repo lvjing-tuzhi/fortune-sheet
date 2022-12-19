@@ -1376,7 +1376,6 @@ export function handleBorder(ctx: Context, type: string) {
 
 export function handleMerge(ctx: Context, type: string) {
   if (!ctx.allowEdit) return;
-  console.log("jinHandleMerge");
   // if (!checkProtectionNotEnable(ctx.currentSheetId)) {
   //   return;
   // }

@@ -75,7 +75,6 @@ export function removeActiveImage(ctx: Context) {
 }
 
 export function insertImage(ctx: Context, image: HTMLImageElement) {
-  console.log("jinImage");
   if (!ctx.allowEdit) return;
   try {
     const last =

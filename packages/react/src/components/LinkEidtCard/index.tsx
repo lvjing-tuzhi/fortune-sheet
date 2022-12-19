@@ -140,7 +140,6 @@ export const LinkEditCard: React.FC<LinkCardProps> = ({
   }, [context, selectingCellRange]);
 
   if (!isEditing) {
-    console.log("jin");
     return (
       <div
         {...containerEvent}
