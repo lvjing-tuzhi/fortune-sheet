@@ -5,6 +5,7 @@ import {
   getSelectRange,
   locale,
 } from "@fortune-sheet/core";
+import produce from "immer";
 import _ from "lodash";
 import React, { useContext, useState, useCallback, useRef } from "react";
 import WorkbookContext from "../../context";
@@ -31,7 +32,6 @@ export const LocationCondition: React.FC<{}> = () => {
     locationBool: true,
     locationError: true,
   });
-
   // 确定按钮
   const certainBtn = useCallback(() => {
     hideDialog();
@@ -164,7 +164,7 @@ export const LocationCondition: React.FC<{}> = () => {
           <label htmlFor="locationConstant">
             {findAndReplace.locationConstant}
           </label>
-          <div className="subbox">
+          {/* <div className="subbox">
             <div className="subItem">
               <input
                 type="checkbox"
@@ -290,6 +290,39 @@ export const LocationCondition: React.FC<{}> = () => {
                 {findAndReplace.locationError}
               </label>
             </div>
+          </div> */}
+          <div className="subbox">
+            {[
+              "locationDate",
+              "locationDigital",
+              "locationString",
+              "locationBool",
+              "locationError",
+            ].map((v) => (
+              <div className="subItem" key={v}>
+                <input
+                  type="checkbox"
+                  id={v}
+                  disabled={!isSelect("locationConstant")}
+                  checked={constants[v]}
+                  onChange={() => {
+                    setConstants(
+                      produce((draft) => {
+                        _.set(draft, v, draft[v]);
+                      })
+                    );
+                  }}
+                />
+                <label
+                  htmlFor={v}
+                  style={{
+                    color: isSelect("locationConstant") ? "#000" : "#666",
+                  }}
+                >
+                  {findAndReplace[v]}
+                </label>
+              </div>
+            ))}
           </div>
         </div>
         {/* 公式 */}

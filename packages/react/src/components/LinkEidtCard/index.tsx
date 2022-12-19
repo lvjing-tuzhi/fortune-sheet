@@ -140,6 +140,7 @@ export const LinkEditCard: React.FC<LinkCardProps> = ({
   }, [context, selectingCellRange]);
 
   if (!isEditing) {
+    console.log("jin");
     return (
       <div
         {...containerEvent}
@@ -175,20 +176,22 @@ export const LinkEditCard: React.FC<LinkCardProps> = ({
             navigator.clipboard.writeText(originAddress);
             hideLinkCard();
           })}
-        {renderToolbarButton("pencil", () =>
-          setContext((draftCtx) => {
-            if (draftCtx.linkCard != null) {
-              draftCtx.linkCard.isEditing = true;
-            }
-          })
-        )}
+        {context.allowEdit &&
+          renderToolbarButton("pencil", () =>
+            setContext((draftCtx) => {
+              if (draftCtx.linkCard != null) {
+                draftCtx.linkCard.isEditing = true;
+              }
+            })
+          )}
         <div className="divider" />
-        {renderToolbarButton("unlink", () =>
-          setContext((draftCtx) => {
-            _.set(refs.globalCache, "linkCard.mouseEnter", false);
-            removeHyperlink(draftCtx, r, c);
-          })
-        )}
+        {context.allowEdit &&
+          renderToolbarButton("unlink", () =>
+            setContext((draftCtx) => {
+              _.set(refs.globalCache, "linkCard.mouseEnter", false);
+              removeHyperlink(draftCtx, r, c);
+            })
+          )}
       </div>
     );
   }

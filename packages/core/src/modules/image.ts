@@ -75,6 +75,8 @@ export function removeActiveImage(ctx: Context) {
 }
 
 export function insertImage(ctx: Context, image: HTMLImageElement) {
+  console.log("jinImage");
+  if (!ctx.allowEdit) return;
   try {
     const last =
       ctx.luckysheet_select_save?.[ctx.luckysheet_select_save.length - 1];

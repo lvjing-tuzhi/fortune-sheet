@@ -1095,6 +1095,7 @@ export function handleVerticalAlign(
 }
 
 export function handleFormatPainter(ctx: Context) {
+  if (!ctx.allowEdit) return;
   //   if (!checkIsAllowEdit()) {
   //     tooltip.info("", locale().pivotTable.errorNotAllowEdit);
   //     return
@@ -1235,6 +1236,7 @@ function coverBorderNone(ctx: Context) {
 
 // 2022-10-10 废弃了handleClearFormat中的foreach写法，改为可跳出的every写法，以防止选区多次覆盖
 export function handleClearFormat(ctx: Context) {
+  if (!ctx.allowEdit) return;
   const flowdata = getFlowdata(ctx);
   if (!flowdata) return;
   ctx.luckysheet_select_save?.every((selection) => {
@@ -1311,6 +1313,7 @@ export function handleTextBackground(
 }
 
 export function handleBorder(ctx: Context, type: string) {
+  if (!ctx.allowEdit) return;
   // *如果禁止前台编辑，则中止下一步操作
   // if (!checkIsAllowEdit()) {
   //   tooltip.info("", locale().pivotTable.errorNotAllowEdit);
@@ -1372,6 +1375,8 @@ export function handleBorder(ctx: Context, type: string) {
 }
 
 export function handleMerge(ctx: Context, type: string) {
+  if (!ctx.allowEdit) return;
+  console.log("jinHandleMerge");
   // if (!checkProtectionNotEnable(ctx.currentSheetId)) {
   //   return;
   // }
@@ -1471,6 +1476,7 @@ export function handleSum(
 }
 
 export function handleLink(ctx: Context) {
+  if (!ctx.allowEdit) return;
   const selection = ctx.luckysheet_select_save?.[0];
   const flowdata = getFlowdata(ctx);
   if (flowdata != null && selection != null) {
