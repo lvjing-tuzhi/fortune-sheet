@@ -1,4 +1,5 @@
 import _ from "lodash";
+import { initSheetData } from "../api/sheet";
 import { Context } from "../context";
 import { locale } from "../locale";
 import { Settings } from "../settings";
@@ -187,6 +188,17 @@ export function deleteSheet(ctx: Context, id: string) {
       ctx.hooks.afterDeleteSheet?.(id);
     });
   }
+}
+
+export function updateSheet(ctx: Context, newData: Sheet[]) {
+  newData.forEach((newDatum) => {
+    if (newDatum.data != null) {
+      ctx.luckysheetfile = newData;
+    } else if (newDatum.celldata != null) {
+      const index = getSheetIndex(ctx, newDatum.id!) as number;
+      initSheetData(ctx, index, newDatum.celldata);
+    }
+  });
 }
 
 export function editSheetName(ctx: Context, editable: HTMLSpanElement) {
