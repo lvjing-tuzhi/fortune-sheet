@@ -458,6 +458,9 @@ export function onDropCellSelect(
   const winH = rect.height - 20 * ctx.zoomRatio;
   const winW = rect.width - 60 * ctx.zoomRatio;
 
+  // console.log("onDropCellSelect");
+  // console.log(container.offsetHeight);
+
   const row_location = rowLocation(y, ctx.visibledatarow);
   const row = row_location[1];
   const row_pre = row_location[0];
@@ -489,7 +492,6 @@ export function onDropCellSelect(
       ctx.luckysheet_select_save[0].column[1] -
       ctx.luckysheet_select_save[0].column[0];
   }
-
   if (row_e >= ctx.visibledatarow[ctx.visibledatarow.length - 1] || y > winH) {
     row_s =
       ctx.visibledatarow.length -
@@ -2839,6 +2841,10 @@ export function onDropCellSelectEnd(
 
   const winH = rect.height - 20 * ctx.zoomRatio;
   const winW = rect.width - 60 * ctx.zoomRatio;
+
+  // console.log("onDropCellSelectEnd");
+
+  // console.log(winH);
 
   const row_location = rowLocation(y, ctx.visibledatarow);
   // const row = row_location[1];
